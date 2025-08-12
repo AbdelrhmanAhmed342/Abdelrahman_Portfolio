@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdelrahman Ahmed - Portfolio</title>
+<style>
+  * {margin: 0; padding: 0; box-sizing: border-box;}
+  body {font-family: Arial, sans-serif; background: #fdfdfd; color: #333; scroll-behavior: smooth;}
+  h1, h2, h3 {font-weight: bold;}
+  a {text-decoration: none; color: #0077cc;}
+  section {padding: 60px 20px; max-width: 1100px; margin: auto;}
+  header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
+    padding: 10px 30px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #eee; z-index: 999;
+  }
+  header nav a {margin: 0 15px; font-weight: 500;}
+  header nav a:hover {color: #ff6600;}
+  .hero {height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(to bottom, #e0f7fa, #ffffff);}
+  .hero h1 {font-size: 3rem; margin-bottom: 10px;}
+  .hero h3 {font-size: 1.5rem; color: #555;}
+  .animated-text {margin-top: 15px; font-size: 1.2rem; font-style: italic; height: 30px;}
+  .fade-in {opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
+  .fade-in.show {opacity: 1; transform: translateY(0);}
+  .skills-list {display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;}
+  .skill {background: #0077cc; color: #fff; padding: 8px 12px; border-radius: 5px; font-size: 0.9rem;}
+  .projects {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;}
+  .project-card {background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
+  .project-card h3 {margin-bottom: 10px;}
+  .project-card p {font-size: 0.9rem; color: #555; margin-bottom: 10px;}
+  .project-card a {display: inline-block; margin-top: 10px; background: #0077cc; color: white; padding: 8px 12px; border-radius: 5px;}
+  .experience ul {list-style: none;}
+  .experience li {margin-bottom: 20px;}
+  .experience strong {display: block; font-size: 1.1rem;}
+  footer {text-align: center; padding: 20px; background: #fafafa; font-size: 0.9rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div><strong>Abdelrahman Ahmed</strong></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#courses">Courses</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Abdelrahman Ahmed</h1>
+  <h3>Data Scientist · ML Engineer</h3>
+  <div class="animated-text" id="animatedText"></div>
+</section>
+
+<section id="about" class="fade-in">
+  <h2>About Me</h2>
+  <p>I am a passionate Data Scientist and Machine Learning Engineer with a strong foundation in Python, SQL, and advanced ML frameworks. My journey spans real-world projects where I’ve built predictive models, designed recommendation systems, and performed large-scale data analysis. Highlights include forecasting air quality using XGBoost, analyzing sports data for LaLiga, and creating custom clustering and classification models. I’m committed to transforming complex data into actionable insights that drive decision-making and deliver measurable impact.</p>
+</section>
+
+<section id="experience" class="fade-in">
+  <h2>Experience</h2>
+  <div class="experience">
+    <ul>
+      <li>
+        <strong>Project Management Information System – Rowad Modern Engineering</strong> (Mar 2025–Present)
+        <span>Managing and maintaining large-scale project data in Oracle Primavera Unifier. Automated data cleaning, validation, and reporting workflows using Python (Pandas, NumPy) and SQL, reducing manual work and errors. Collaborated with engineers and project managers to ensure data accuracy and timely reporting.</span>
+      </li>
+      <li>
+        <strong>Data Analysis Intern – Rowad Modern Engineering</strong> (Jan–Feb 2025)
+        <span>Worked with the data team to clean, transform, and visualize operational datasets. Conducted exploratory data analysis (EDA) to identify trends and anomalies. Created dashboards and visual reports using Power BI and Matplotlib to support decision-making in project planning.</span>
+      </li>
+      <li>
+        <strong>IT Specialist – Constracta</strong> (Oct–Dec 2024)
+        <span>Reduced system downtime by 25% through improved maintenance protocols. Managed network configurations, implemented secure user account policies, and set up automated backup routines to ensure data security and availability.</span>
+      </li>
+      <li>
+        <strong>Customer Service Intern – QNB</strong> (Aug–Sep 2023)
+        <span>Handled customer banking inquiries, processed financial transactions, and improved the documentation process for service requests using Excel. Delivered quick and accurate solutions while maintaining excellent customer satisfaction.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects" class="fade-in">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3>Air Quality Prediction</h3>
+      <p>Developed an XGBoost model to forecast PM2.5 air pollution levels using large datasets of Indian cities. Included EDA with trend analysis, feature engineering, and evaluation metrics for accuracy. Produced interactive visualizations to communicate pollution patterns.</p>
+      <a href="https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing" target="_blank">View in Colab</a>
+    </div>
+    <div class="project-card">
+      <h3>LaLiga Regression</h3>
+      <p>Performed regression analysis to predict goals scored in LaLiga matches based on team statistics, historical results, and match conditions. Implemented multiple models, tuned hyperparameters, and compared performance to select the best approach.</p>
+      <a href="https://colab.research.google.com/drive/1bFOhZUlb97ON3lNIu4H1vK85Jus_9nE5?usp=sharing" target="_blank">View in Colab</a>
+    </div>
+    <div class="project-card">
+      <h3>LaLiga Clustering</h3>
+      <p>Applied K-Means clustering to group LaLiga teams by play style and performance indicators. Reduced dimensionality using PCA and visualized clusters to reveal strategic similarities between teams.</p>
+      <a href="https://colab.research.google.com/drive/1lF2Lp8cq5npiqP1rWYeQy_bQH221_3QG?usp=sharing" target="_blank">View in Colab</a>
+    </div>
+    <div class="project-card">
+      <h3>LaLiga Classification</h3>
+      <p>Built a classification model to predict match outcomes (win/draw/loss) using team and match statistics. Evaluated multiple classifiers, including XGBoost and Random Forest, and analyzed performance through ROC/AUC and confusion matrices.</p>
+      <a href="https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing" target="_blank">View in Colab</a>
+    </div>
+    <div class="project-card">
+      <h3>Madrid Weather Recommender</h3>
+      <p>Created a recommendation engine that suggests activities in Madrid based on historical and forecasted weather data. Incorporated time-series analysis, temperature/humidity trends, and user-friendly recommendations.</p>
+      <a href="https://colab.research.google.com/drive/1Hzddhp7717Po87OrblSKx5QDWvcO7oX_?usp=sharing" target="_blank">View in Colab</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="fade-in">
+  <h2>Skills</h2>
+  
+  <h3>Technical Skills</h3>
+  <div class="skills-list">
+    <div class="skill">Python</div>
+    <div class="skill">SQL</div>
+    <div class="skill">PL/SQL</div>
+    <div class="skill">Scikit-learn</div>
+    <div class="skill">TensorFlow</div>
+    <div class="skill">PyTorch</div>
+    <div class="skill">Transformers</div>
+    <div class="skill">Pandas</div>
+    <div class="skill">NumPy</div>
+    <div class="skill">Power BI</div>
+    <div class="skill">Tableau</div>
+  </div>
+
+  <h3 style="margin-top:20px;">Soft Skills</h3>
+  <div class="skills-list">
+    <div class="skill">Team Collaboration</div>
+    <div class="skill">Analytical Thinking</div>
+    <div class="skill">Problem-Solving</div>
+    <div class="skill">Time Management</div>
+    <div class="skill">Attention to Detail</div>
+    <div class="skill">Adaptability</div>
+    <div class="skill">Communication</div>
+  </div>
+</section>
+
+<section id="courses" class="fade-in">
+  <h2>Courses & Certifications</h2>
+  <ul>
+    <li>IBM: Deep Learning with Keras (2025)</li>
+    <li>IBM: Deep Learning with PyTorch (2025)</li>
+    <li>IBM: Generative AI Engineering with LLMs Specialization (2025)</li>
+    <li>AMIT: Machine Learning & Data Science Diploma (Python, TensorFlow, NLP) (2025)</li>
+    <li>Next Academy: Oracle Development (SQL, PL/SQL) (2025)</li>
+    <li>IT Share: CCNA (Routing/Switching) (2022)</li>
+  </ul>
+</section>
+
+<section id="contact" class="fade-in">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:abdo.elgoneeemy@gmail.com">abdo.elgoneeemy@gmail.com</a></p>
+  <p>Phone: +20 1096723618</p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank">LinkedIn Profile</a></p>
+  <p><a href="Abdelrahman_Ahmed_CV_1pdf.pdf" download>Download CV</a></p>
+</section>
+
+<footer>
+  © 2025 Abdelrahman Ahmed — Built with ❤️
+</footer>
+
+<script>
+  const phrases = [
+    "Turning data into insights",
+    "Building models that matter",
+    "Delivering real-world solutions"
+  ];
+  let currentPhrase = 0;
+  const animatedText = document.getElementById("animatedText");
+  function changePhrase() {
+    animatedText.textContent = phrases[currentPhrase];
+    currentPhrase = (currentPhrase + 1) % phrases.length;
+  }
+  setInterval(changePhrase, 3000);
+  changePhrase();
+
+  const fadeEls = document.querySelectorAll(".fade-in");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, {threshold: 0.1});
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
