@@ -20,87 +20,40 @@
     .btn:hover { background:#e0e7ff; }
     section { padding:60px 20px; max-width:1100px; margin:auto; }
     h2 { text-align:center; margin-bottom:30px; }
-    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
     .project-card { background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+    .project-card h3 { margin-bottom:10px; color:#2563eb; }
+    .project-card p { margin:5px 0; }
     footer { text-align:center; background:#1f2937; color:white; padding:20px; margin-top:40px; }
+
+    /* Timeline for Experience */
+    .timeline { border-left:4px solid #2563eb; padding-left:20px; }
+    .timeline-item { margin-bottom:30px; }
+    .timeline-item h3 { color:#2563eb; }
+    .timeline-item p { margin:5px 0; }
 
     /* Chatbot */
     .chatbot-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      z-index: 1001;
+      position: fixed; bottom: 20px; right: 20px;
+      background: #2563eb; color: white; border: none;
+      border-radius: 50%; width: 60px; height: 60px;
+      font-size: 1.5rem; cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1001;
     }
     .chatbot-window {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 320px;
-      max-height: 400px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 1001;
+      position: fixed; bottom: 90px; right: 20px;
+      width: 340px; max-height: 450px; background: white;
+      border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      display: flex; flex-direction: column; overflow: hidden; z-index: 1001;
     }
-    .chat-header {
-      background: #2563eb;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .chat-body {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 0.9rem;
-    }
-    .chat-message {
-      margin: 5px 0;
-      padding: 8px 12px;
-      border-radius: 12px;
-      max-width: 80%;
-      line-height: 1.4;
-    }
-    .chat-message.user {
-      background: #2563eb;
-      color: white;
-      margin-left: auto;
-    }
-    .chat-message.bot {
-      background: #f3f4f6;
-      color: #1f2937;
-      margin-right: auto;
-    }
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #ddd;
-    }
-    .chat-input input {
-      flex: 1;
-      border: none;
-      padding: 10px;
-      font-size: 0.9rem;
-    }
-    .chat-input button {
-      background: #2563eb;
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
+    .chat-header { background: #2563eb; color: white; padding: 10px; text-align: center; font-weight: bold; }
+    .chat-body { flex: 1; padding: 10px; overflow-y: auto; font-size: 0.9rem; }
+    .chat-message { margin: 5px 0; padding: 8px 12px; border-radius: 12px; max-width: 80%; line-height: 1.4; }
+    .chat-message.user { background: #2563eb; color: white; margin-left: auto; }
+    .chat-message.bot { background: #f3f4f6; color: #1f2937; margin-right: auto; }
+    .chat-input { display: flex; border-top: 1px solid #ddd; }
+    .chat-input input { flex: 1; border: none; padding: 10px; font-size: 0.9rem; }
+    .chat-input button { background: #2563eb; border: none; color: white; padding: 10px 15px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -113,19 +66,27 @@
     function Chatbot() {
       const [open, setOpen] = useState(false);
       const [messages, setMessages] = useState([
-        { from: "bot", text: "Hi 👋 I'm Abdelrahman's assistant. Ask me about him!" }
+        { from: "bot", text: "Hi 👋 I'm Abdelrahman's assistant. Ask me about his skills, experience, or projects!" }
       ]);
       const [input, setInput] = useState("");
 
       const cvData = {
         about: "I'm Abdelrahman Ahmed, a Data Scientist & ML Engineer skilled in Python, SQL, TensorFlow, PyTorch, and AWS. Passionate about AI and data-driven solutions.",
         experience: [
-          "Rowad Modern Engineering (2025–Present): Managed project data in Oracle Primavera, automated workflows with Python/SQL.",
-          "Constracta (2024): IT Specialist, reduced downtime 25%, improved data security.",
-          "QNB Bank (2023): Customer Service Intern, streamlined documentation with Excel."
+          "Rowad Modern Engineering (2025–Present): Automated integration of 320K+ records using Python and SQL. Built dashboards that reduced reporting time by 50%.",
+          "Elevoo (2025): Developed ML classification models and NLP pipelines, improving training efficiency by 20%.",
+          "Cellula Technologies (2025): Built NLP models with TensorFlow/scikit-learn, applied hyperparameter tuning, delivered final project with certificate + recommendation.",
+          "Constracta (2024): IT Specialist, reduced system downtime 25%, secured user accounts and implemented backup routines.",
+          "QNB Bank (2023): Customer Service Intern, resolved inquiries, processed transactions, improved documentation using Excel."
         ],
         skills: "Python, SQL, Machine Learning, Deep Learning, TensorFlow, PyTorch, Data Engineering, MLOps, AWS, Docker, Git.",
-        projects: "Built Salary Recommendation System, Chest X-Ray Classification, Weather Recommendation Engine, LaLiga Match Analysis."
+        projects: [
+          "Chest X-Ray Classification → CNN model for pneumonia detection. Link: https://colab.research.google.com/drive/1oR1A_qpiENqZ80T9lUKK0QpkKYXZDA--?usp=sharing",
+          "Air Quality Prediction in India → Forecasting PM2.5 with XGBoost. Link: https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing",
+          "Cryptocurrency Historical Prices → LSTM model for BTC/ETH price prediction. Link: https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing",
+          "LaLiga Analysis (3 models): Clustering: https://colab.research.google.com/drive/1lF2Lp8cq5npiqP1rWYeQy_bQH221_3QG?usp=sharing | Regression: https://colab.research.google.com/drive/1bFOhZUlb97ON3lNIu4H1vK85Jus_9nE5?usp=sharing | Classification: https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing",
+          "Weather Recommendation Engine (Madrid 1999–2015): https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing"
+        ]
       };
 
       const handleSend = () => {
@@ -138,7 +99,7 @@
         if (q.includes("about") || q.includes("who")) reply = cvData.about;
         else if (q.includes("experience") || q.includes("work")) reply = cvData.experience.join(" | ");
         else if (q.includes("skill")) reply = cvData.skills;
-        else if (q.includes("project")) reply = cvData.projects;
+        else if (q.includes("project")) reply = cvData.projects.join(" | ");
 
         setTimeout(() => {
           setMessages(msgs => [...msgs, { from: "bot", text: reply }]);
@@ -177,6 +138,92 @@
 
     // Portfolio Component
     function Portfolio() {
+      const projects = [
+        {
+          title: "Chest X-Ray Classification",
+          problem: "Pneumonia detection in X-rays is time-consuming for doctors.",
+          action: "Built a CNN model in TensorFlow to classify chest X-rays.",
+          result: "Model achieved strong accuracy, supporting medical diagnostics.",
+          link: "https://colab.research.google.com/drive/1oR1A_qpiENqZ80T9lUKK0QpkKYXZDA--?usp=sharing"
+        },
+        {
+          title: "Air Quality Prediction in India",
+          problem: "Air pollution poses serious health risks in urban areas.",
+          action: "Developed an XGBoost regression model using meteorological + air quality data.",
+          result: "Produced accurate PM2.5 forecasts to support public health advisories.",
+          link: "https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing"
+        },
+        {
+          title: "Cryptocurrency Historical Prices",
+          problem: "High volatility in BTC/ETH makes price forecasting difficult.",
+          action: "Built an LSTM neural network on 5 years of BTC/ETH data.",
+          result: "Achieved 83% accuracy in predicting price trends.",
+          link: "https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing"
+        },
+        {
+          title: "LaLiga Match Analysis (3 Models)",
+          problem: "Football clubs need insights into performance and tactics.",
+          action: "Developed clustering, regression, and classification models on LaLiga dataset.",
+          result: "Delivered player rankings, expected goals overperformance, and outcome prediction.",
+          link: "https://github.com/AbdelrhmanAhmed342"
+        },
+        {
+          title: "Weather Recommendation Engine (Madrid)",
+          problem: "People often struggle to plan activities based on weather.",
+          action: "Built a Streamlit app using 15+ years of Madrid weather data.",
+          result: "Suggested outdoor/indoor activities tailored to conditions.",
+          link: "https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing"
+        }
+      ];
+
+      const experiences = [
+        {
+          company: "Rowad Modern Engineering",
+          role: "Project Management Information System",
+          period: "Mar 2025 – Present",
+          details: [
+            "Automated data integration for 320K+ records using Python (Pandas/NumPy).",
+            "Built SQL queries and dashboards reducing reporting time by 50%."
+          ]
+        },
+        {
+          company: "Elevoo",
+          role: "Machine Learning Intern",
+          period: "Sep 2025 – Dec 2025",
+          details: [
+            "Developed ML classification models and NLP pipelines (tokenization, vectorization).",
+            "Preprocessed datasets, improving training efficiency by 20%."
+          ]
+        },
+        {
+          company: "Cellula Technologies",
+          role: "AI/ML Intern",
+          period: "Sep 2025 – Nov 2025",
+          details: [
+            "Built NLP models with TensorFlow/scikit-learn and applied hyperparameter tuning.",
+            "Delivered final project and earned certificate + recommendation letter."
+          ]
+        },
+        {
+          company: "Constracta",
+          role: "IT Specialist",
+          period: "Oct 2024 – Dec 2024",
+          details: [
+            "Reduced system downtime 25% through improved maintenance protocols.",
+            "Implemented secure user accounts and backup routines."
+          ]
+        },
+        {
+          company: "QNB Bank",
+          role: "Customer Service Intern",
+          period: "Aug 2023 – Sep 2023",
+          details: [
+            "Resolved banking inquiries and processed financial transactions.",
+            "Improved service request documentation using Excel."
+          ]
+        }
+      ];
+
       return (
         <div>
           <header>
@@ -184,30 +231,59 @@
               <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
             </nav>
           </header>
+
           <section className="hero">
             <h1>Abdelrahman Ahmed</h1>
             <h2>Data Scientist & ML Engineer</h2>
             <a href="#projects" className="btn">View Projects</a>
           </section>
+
           <section id="about">
             <h2>About Me</h2>
-            <p>I’m Abdelrahman, an AI/ML Engineer with hands-on experience in NLP, deep learning, and data analysis.</p>
+            <p>I am Abdelrahman, a passionate AI/ML Engineer with a proven record of developing predictive models, building NLP pipelines, and delivering impactful data-driven solutions. Skilled in Python, SQL, TensorFlow, and PyTorch, I focus on transforming complex datasets into actionable insights and real-world applications.</p>
           </section>
+
           <section id="projects">
             <h2>Projects</h2>
             <div className="projects-grid">
-              <div className="project-card"><h3>Salary Recommendation</h3><p>Predict salaries using ML.</p></div>
-              <div className="project-card"><h3>Chest X-Ray Classification</h3><p>Detect pneumonia using CNNs.</p></div>
+              {projects.map((proj, i) => (
+                <div key={i} className="project-card">
+                  <h3>{proj.title}</h3>
+                  <p><b>Problem:</b> {proj.problem}</p>
+                  <p><b>Action:</b> {proj.action}</p>
+                  <p><b>Result:</b> {proj.result}</p>
+                  <a href={proj.link} target="_blank" rel="noopener noreferrer">🔗 View Project</a>
+                </div>
+              ))}
             </div>
           </section>
+
+          <section id="experience">
+            <h2>Experience</h2>
+            <div className="timeline">
+              {experiences.map((exp, i) => (
+                <div key={i} className="timeline-item">
+                  <h3>{exp.company}</h3>
+                  <p><i>{exp.role}</i> | {exp.period}</p>
+                  <ul>
+                    {exp.details.map((d, j) => <li key={j}>{d}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <section id="contact">
             <h2>Contact</h2>
-            <p>Email: abdo.elgoneeemy@gmail.com | LinkedIn | GitHub</p>
+            <p>Email: <a href="mailto:abdo.elgoneeemy@gmail.com">abdo.elgoneeemy@gmail.com</a></p>
+            <p><a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank">LinkedIn</a> | <a href="https://github.com/AbdelrhmanAhmed342" target="_blank">GitHub</a></p>
           </section>
+
           <footer>© 2025 Abdelrahman Ahmed</footer>
           <Chatbot />
         </div>
