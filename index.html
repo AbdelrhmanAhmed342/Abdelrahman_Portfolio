@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abdelrahman Ahmed | Data Scientist Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdelrahman Ahmed | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #2563eb; /* Blue */
-      --gray: #6b7280;   /* Neutral gray */
-      --light-bg: #f9fafb;
-      --dark-text: #111827;
+      --primary: #2563eb;
+      --secondary: #1e3a8a;
+      --gray: #6b7280;
+      --light: #f9fafb;
+      --dark: #111827;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--light-bg);
-      color: var(--dark-text);
+      font-family: "Segoe UI", sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
     }
     header {
       background: var(--primary);
-      color: white;
       padding: 15px 0;
       position: sticky;
       top: 0;
@@ -33,150 +30,73 @@
     nav {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
     }
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 0;
-    }
+    nav a:hover { text-decoration: underline; }
     .hero {
       text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+      padding: 100px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
     }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    .hero h2 {
-      font-weight: normal;
-      margin-bottom: 20px;
-    }
-    .hero .btn {
+    .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+    .hero h2 { font-weight: normal; margin-bottom: 20px; }
+    .btn {
       display: inline-block;
       padding: 10px 20px;
       margin: 10px;
       border-radius: 8px;
-      background: white;
-      color: #2563eb;
-      text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s, color 0.3s;
+      text-decoration: none;
+      transition: 0.3s;
     }
-    .hero .btn:hover {
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+    .btn-primary:hover {
       background: #e0e7ff;
     }
-    .hero .btn-outline {
+    .btn-outline {
       border: 2px solid white;
-      background: transparent;
       color: white;
     }
-    .hero .btn-outline:hover {
+    .btn-outline:hover {
       background: white;
-      color: #2563eb;
+      color: var(--primary);
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
+    .container { width: 90%; max-width: 1100px; margin: auto; padding: 60px 0; }
+    h2.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
     /* About */
-    .about {
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-    }
+    .about { text-align: center; max-width: 800px; margin: auto; }
     /* Projects */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
     .project-card {
       background: white;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s;
     }
-    .project-card:hover {
-      transform: translateY(-5px);
-    }
-    .project-card h3 {
-      margin-top: 0;
-    }
+    .project-card:hover { transform: translateY(-5px); }
+    .project-card h3 { margin-bottom: 10px; }
     .project-card a {
       display: inline-block;
       margin-top: 10px;
+      font-weight: bold;
       color: var(--primary);
       text-decoration: none;
-      font-weight: bold;
     }
-    .project-card a:hover {
-      text-decoration: underline;
-    }
-    /* Chatbot */
-    .chatbot {
-      max-width: 500px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .chat-header {
-      background: var(--primary);
-      color: white;
-      padding: 15px;
-      font-weight: bold;
-    }
-    .chat-box {
-      height: 300px;
-      overflow-y: auto;
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    .chat-message {
-      margin: 10px 0;
-    }
-    .chat-message.user {
-      text-align: right;
-      color: var(--primary);
-    }
-    .chat-input {
-      display: flex;
-      padding: 10px;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin-right: 10px;
-    }
-    .chat-input button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .chat-input button:hover {
-      background: #1d4ed8;
-    }
+    .project-card a:hover { text-decoration: underline; }
     /* Contact */
     .contact-links {
       display: flex;
@@ -185,25 +105,20 @@
       gap: 20px;
     }
     .contact-links a {
+      color: var(--dark);
       text-decoration: none;
-      color: var(--dark-text);
+      font-weight: bold;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: bold;
     }
-    .contact-links a:hover {
-      color: var(--primary);
-    }
+    .contact-links a:hover { color: var(--primary); }
     footer {
       text-align: center;
       padding: 20px;
       background: #f3f4f6;
-      font-size: 0.9rem;
       color: var(--gray);
-    }
-    html {
-      scroll-behavior: smooth;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -212,7 +127,6 @@
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
-      <a href="#chatbot">Chatbot</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -220,13 +134,13 @@
   <section class="hero">
     <h1>Abdelrahman Ahmed</h1>
     <h2>AI/ML Engineer | Data Scientist</h2>
-    <a href="#projects" class="btn">View Projects</a>
+    <a href="#projects" class="btn btn-primary">View Projects</a>
     <a href="#contact" class="btn btn-outline">Contact Me</a>
   </section>
 
   <div class="container">
     <section id="about" class="about">
-      <h2>About Me</h2>
+      <h2 class="section-title">About Me</h2>
       <p>
         I’m Abdelrahman, an AI/ML Engineer with hands-on experience in NLP, deep learning, and data analysis.  
         Skilled in TensorFlow, PyTorch, scikit-learn, SQL, and cloud platforms (AWS, GCP, Azure).  
@@ -235,7 +149,7 @@
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
+      <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
           <h3>Salary Recommendation System</h3>
@@ -255,22 +169,8 @@
       </div>
     </section>
 
-    <section id="chatbot">
-      <h2>Ask My Portfolio Chatbot</h2>
-      <div class="chatbot">
-        <div class="chat-header">Chat with Me</div>
-        <div class="chat-box" id="chat-box">
-          <div class="chat-message">👋 Hi! Ask me about my skills, projects, or experience.</div>
-        </div>
-        <div class="chat-input">
-          <input type="text" id="chat-input" placeholder="Type your question..." />
-          <button onclick="sendMessage()">Send</button>
-        </div>
-      </div>
-    </section>
-
     <section id="contact">
-      <h2>Contact</h2>
+      <h2 class="section-title">Contact</h2>
       <div class="contact-links">
         <a href="mailto:abdo.elgoneeemy@gmail.com"><i class="fas fa-envelope"></i> Email</a>
         <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -283,41 +183,7 @@
   </div>
 
   <footer>
-    © 2025 Abdelrahman Ahmed | Built with ❤️ and JavaScript
+    © 2025 Abdelrahman Ahmed | Built with ❤️
   </footer>
-
-  <script>
-    function sendMessage() {
-      const input = document.getElementById('chat-input');
-      const message = input.value.trim();
-      if (!message) return;
-
-      const chatBox = document.getElementById('chat-box');
-
-      // Add user message
-      const userMsg = document.createElement('div');
-      userMsg.className = 'chat-message user';
-      userMsg.innerText = message;
-      chatBox.appendChild(userMsg);
-
-      // Simulated bot response
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-message';
-      botMsg.innerText = getBotResponse(message);
-      chatBox.appendChild(botMsg);
-
-      chatBox.scrollTop = chatBox.scrollHeight;
-      input.value = '';
-    }
-
-    function getBotResponse(msg) {
-      msg = msg.toLowerCase();
-      if (msg.includes('skills')) return "I’m skilled in Python, C++, TensorFlow, PyTorch, SQL, and cloud platforms (AWS/GCP/Azure).";
-      if (msg.includes('projects')) return "Check out my projects: Salary Recommendation, Chest X-Ray Classification, Weather Engine.";
-      if (msg.includes('experience')) return "Experience: Rowad Modern Engineering, Elevoo (ML Intern), Cellula Technologies (AI/ML Intern).";
-      if (msg.includes('contact')) return "You can reach me via email, LinkedIn, or GitHub in the Contact section.";
-      return "I’m still learning 🤖. Please check my portfolio sections above!";
-    }
-  </script>
 </body>
 </html>
