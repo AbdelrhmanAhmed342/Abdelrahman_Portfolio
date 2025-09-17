@@ -3,187 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdelrahman Ahmed | Portfolio</title>
+  <title>Abdelrahman Ahmed - Portfolio with Chatbot</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #1e3a8a;
-      --gray: #6b7280;
-      --light: #f9fafb;
-      --dark: #111827;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-    header {
-      background: var(--primary);
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-    }
-    nav a {
+    body { font-family: 'Segoe UI', sans-serif; margin:0; padding:0; background:#f9fafb; color:#1f2937; }
+    header { background:white; padding:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
+    nav ul { display:flex; gap:20px; justify-content:center; list-style:none; }
+    nav a { text-decoration:none; color:#1f2937; font-weight:600; }
+    nav a:hover { color:#2563eb; }
+    .hero { text-align:center; padding:100px 20px; background:linear-gradient(135deg,#2563eb,#1e40af); color:white; }
+    .hero h1 { font-size:3rem; margin-bottom:10px; }
+    .btn { background:#fff; color:#2563eb; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; font-weight:600; }
+    .btn:hover { background:#e0e7ff; }
+    section { padding:60px 20px; max-width:1100px; margin:auto; }
+    h2 { text-align:center; margin-bottom:30px; }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+    .project-card { background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+    footer { text-align:center; background:#1f2937; color:white; padding:20px; margin-top:40px; }
+
+    /* Chatbot */
+    .chatbot-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2563eb;
       color: white;
-      text-decoration: none;
-      font-weight: 600;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1001;
     }
-    nav a:hover { text-decoration: underline; }
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
-    .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-    .hero h2 { font-weight: normal; margin-bottom: 20px; }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .btn-primary {
+    .chatbot-window {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      max-height: 400px;
       background: white;
-      color: var(--primary);
-    }
-    .btn-primary:hover {
-      background: #e0e7ff;
-    }
-    .btn-outline {
-      border: 2px solid white;
-      color: white;
-    }
-    .btn-outline:hover {
-      background: white;
-      color: var(--primary);
-    }
-    .container { width: 90%; max-width: 1100px; margin: auto; padding: 60px 0; }
-    h2.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-    /* About */
-    .about { text-align: center; max-width: 800px; margin: auto; }
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .project-card {
-      background: white;
-      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .project-card:hover { transform: translateY(-5px); }
-    .project-card h3 { margin-bottom: 10px; }
-    .project-card a {
-      display: inline-block;
-      margin-top: 10px;
-      font-weight: bold;
-      color: var(--primary);
-      text-decoration: none;
-    }
-    .project-card a:hover { text-decoration: underline; }
-    /* Contact */
-    .contact-links {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1001;
     }
-    .contact-links a {
-      color: var(--dark);
-      text-decoration: none;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .contact-links a:hover { color: var(--primary); }
-    footer {
+    .chat-header {
+      background: #2563eb;
+      color: white;
+      padding: 10px;
       text-align: center;
-      padding: 20px;
-      background: #f3f4f6;
-      color: var(--gray);
+      font-weight: bold;
+    }
+    .chat-body {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
       font-size: 0.9rem;
+    }
+    .chat-message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 12px;
+      max-width: 80%;
+      line-height: 1.4;
+    }
+    .chat-message.user {
+      background: #2563eb;
+      color: white;
+      margin-left: auto;
+    }
+    .chat-message.bot {
+      background: #f3f4f6;
+      color: #1f2937;
+      margin-right: auto;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+    .chat-input button {
+      background: #2563eb;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <div id="root"></div>
 
-  <section class="hero">
-    <h1>Abdelrahman Ahmed</h1>
-    <h2>AI/ML Engineer | Data Scientist</h2>
-    <a href="#projects" class="btn btn-primary">View Projects</a>
-    <a href="#contact" class="btn btn-outline">Contact Me</a>
-  </section>
+  <script type="text/babel">
+    const { useState } = React;
 
-  <div class="container">
-    <section id="about" class="about">
-      <h2 class="section-title">About Me</h2>
-      <p>
-        I’m Abdelrahman, an AI/ML Engineer with hands-on experience in NLP, deep learning, and data analysis.  
-        Skilled in TensorFlow, PyTorch, scikit-learn, SQL, and cloud platforms (AWS, GCP, Azure).  
-        I focus on turning complex data into actionable insights and real-world solutions.
-      </p>
-    </section>
+    // Chatbot Component
+    function Chatbot() {
+      const [open, setOpen] = useState(false);
+      const [messages, setMessages] = useState([
+        { from: "bot", text: "Hi 👋 I'm Abdelrahman's assistant. Ask me about him!" }
+      ]);
+      const [input, setInput] = useState("");
 
-    <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>Salary Recommendation System</h3>
-          <p>Regression models predicting salaries using scikit-learn.</p>
-          <a href="#">View Project</a>
+      const cvData = {
+        about: "I'm Abdelrahman Ahmed, a Data Scientist & ML Engineer skilled in Python, SQL, TensorFlow, PyTorch, and AWS. Passionate about AI and data-driven solutions.",
+        experience: [
+          "Rowad Modern Engineering (2025–Present): Managed project data in Oracle Primavera, automated workflows with Python/SQL.",
+          "Constracta (2024): IT Specialist, reduced downtime 25%, improved data security.",
+          "QNB Bank (2023): Customer Service Intern, streamlined documentation with Excel."
+        ],
+        skills: "Python, SQL, Machine Learning, Deep Learning, TensorFlow, PyTorch, Data Engineering, MLOps, AWS, Docker, Git.",
+        projects: "Built Salary Recommendation System, Chest X-Ray Classification, Weather Recommendation Engine, LaLiga Match Analysis."
+      };
+
+      const handleSend = () => {
+        if (!input.trim()) return;
+        const userMsg = { from: "user", text: input };
+        setMessages([...messages, userMsg]);
+
+        let reply = "Sorry, I didn't get that. Try asking about skills, experience, or projects!";
+        const q = input.toLowerCase();
+        if (q.includes("about") || q.includes("who")) reply = cvData.about;
+        else if (q.includes("experience") || q.includes("work")) reply = cvData.experience.join(" | ");
+        else if (q.includes("skill")) reply = cvData.skills;
+        else if (q.includes("project")) reply = cvData.projects;
+
+        setTimeout(() => {
+          setMessages(msgs => [...msgs, { from: "bot", text: reply }]);
+        }, 500);
+        setInput("");
+      };
+
+      return (
+        <>
+          <button className="chatbot-button" onClick={() => setOpen(!open)}>
+            <i className="fas fa-comments"></i>
+          </button>
+          {open && (
+            <div className="chatbot-window">
+              <div className="chat-header">💬 Chat with Abdelrahman</div>
+              <div className="chat-body">
+                {messages.map((m, i) => (
+                  <div key={i} className={`chat-message ${m.from}`}>{m.text}</div>
+                ))}
+              </div>
+              <div className="chat-input">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                  placeholder="Ask me about Abdelrahman..."
+                />
+                <button onClick={handleSend}>Send</button>
+              </div>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    // Portfolio Component
+    function Portfolio() {
+      return (
+        <div>
+          <header>
+            <nav>
+              <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </nav>
+          </header>
+          <section className="hero">
+            <h1>Abdelrahman Ahmed</h1>
+            <h2>Data Scientist & ML Engineer</h2>
+            <a href="#projects" className="btn">View Projects</a>
+          </section>
+          <section id="about">
+            <h2>About Me</h2>
+            <p>I’m Abdelrahman, an AI/ML Engineer with hands-on experience in NLP, deep learning, and data analysis.</p>
+          </section>
+          <section id="projects">
+            <h2>Projects</h2>
+            <div className="projects-grid">
+              <div className="project-card"><h3>Salary Recommendation</h3><p>Predict salaries using ML.</p></div>
+              <div className="project-card"><h3>Chest X-Ray Classification</h3><p>Detect pneumonia using CNNs.</p></div>
+            </div>
+          </section>
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: abdo.elgoneeemy@gmail.com | LinkedIn | GitHub</p>
+          </section>
+          <footer>© 2025 Abdelrahman Ahmed</footer>
+          <Chatbot />
         </div>
-        <div class="project-card">
-          <h3>Chest X-Ray Classification</h3>
-          <p>CNN model detecting pneumonia in X-rays using TensorFlow.</p>
-          <a href="#">View Project</a>
-        </div>
-        <div class="project-card">
-          <h3>Weather Recommendation Engine</h3>
-          <p>Streamlit app suggesting activities from weather data.</p>
-          <a href="#">View Project</a>
-        </div>
-      </div>
-    </section>
+      );
+    }
 
-    <section id="contact">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact-links">
-        <a href="mailto:abdo.elgoneeemy@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/AbdelrhmanAhmed342" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="a63b6f0e-45ef-4148-aa34-a4d3bf08f4a5.pdf" download>
-          <i class="fas fa-file-download"></i> Download CV
-        </a>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    © 2025 Abdelrahman Ahmed | Built with ❤️
-  </footer>
+    ReactDOM.render(<Portfolio />, document.getElementById("root"));
+  </script>
 </body>
 </html>
