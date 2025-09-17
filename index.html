@@ -1,722 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdelrahman Ahmed - Data Scientist Portfolio</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Previous styles remain the same */
-
-        /* Chatbot Styles */
-        .chatbot-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .chatbot-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-        }
-
-        .chatbot-button:hover {
-            transform: scale(1.1);
-        }
-
-        .chatbot-button i {
-            font-size: 1.5rem;
-        }
-
-        .chatbot-window {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            width: 350px;
-            height: 450px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transform: scale(0);
-            transform-origin: bottom right;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .chatbot-window.open {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .chatbot-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chatbot-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .message.bot {
-            background-color: #f0f4f8;
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .message.user {
-            background-color: var(--primary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chatbot-input {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 20px;
-            outline: none;
-            font-size: 0.9rem;
-        }
-
-        .chatbot-input button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-left: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .typing-indicator {
-            display: flex;
-            padding: 5px;
-            background-color: #f0f4f8;
-            border-radius: 15px;
-            align-self: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--gray);
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-
-        .typing-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typingAnimation {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .suggested-questions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .suggested-question {
-            background-color: #f0f4f8;
-            padding: 8px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            align-self: flex-start;
-        }
-
-        .suggested-question:hover {
-            background-color: #e0e7ff;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abdelrahman Ahmed | Data Scientist Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #2563eb; /* Blue */
+      --gray: #6b7280;   /* Neutral gray */
+      --light-bg: #f9fafb;
+      --dark-text: #111827;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero h2 {
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+    .hero .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      background: white;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+    .hero .btn:hover {
+      background: #e0e7ff;
+    }
+    .hero .btn-outline {
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+    }
+    .hero .btn-outline:hover {
+      background: white;
+      color: #2563eb;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    /* About */
+    .about {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+    .project-card h3 {
+      margin-top: 0;
+    }
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .project-card a:hover {
+      text-decoration: underline;
+    }
+    /* Chatbot */
+    .chatbot {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .chat-header {
+      background: var(--primary);
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+    }
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .chat-message {
+      margin: 10px 0;
+    }
+    .chat-message.user {
+      text-align: right;
+      color: var(--primary);
+    }
+    .chat-input {
+      display: flex;
+      padding: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+    .chat-input button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .chat-input button:hover {
+      background: #1d4ed8;
+    }
+    /* Contact */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .contact-links a {
+      text-decoration: none;
+      color: var(--dark-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+    }
+    .contact-links a:hover {
+      color: var(--primary);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f3f4f6;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
+  <header>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#chatbot">Chatbot</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+  <section class="hero">
+    <h1>Abdelrahman Ahmed</h1>
+    <h2>AI/ML Engineer | Data Scientist</h2>
+    <a href="#projects" class="btn">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Contact Me</a>
+  </section>
 
-        // Custom Button Component
-        function Button({ children, onClick, className }) {
-            return (
-                <button
-                    onClick={onClick}
-                    className={`px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition ${className || ""}`}
-                >
-                    {children}
-                </button>
-            );
-        }
+  <div class="container">
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <p>
+        I’m Abdelrahman, an AI/ML Engineer with hands-on experience in NLP, deep learning, and data analysis.  
+        Skilled in TensorFlow, PyTorch, scikit-learn, SQL, and cloud platforms (AWS, GCP, Azure).  
+        I focus on turning complex data into actionable insights and real-world solutions.
+      </p>
+    </section>
 
-        // Custom Card Components
-        function Card({ children, className }) {
-            return (
-                <div className={`rounded-2xl shadow-lg p-4 bg-white ${className || ""}`}>
-                    {children}
-                </div>
-            );
-        }
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Salary Recommendation System</h3>
+          <p>Regression models predicting salaries using scikit-learn.</p>
+          <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+          <h3>Chest X-Ray Classification</h3>
+          <p>CNN model detecting pneumonia in X-rays using TensorFlow.</p>
+          <a href="#">View Project</a>
+        </div>
+        <div class="project-card">
+          <h3>Weather Recommendation Engine</h3>
+          <p>Streamlit app suggesting activities from weather data.</p>
+          <a href="#">View Project</a>
+        </div>
+      </div>
+    </section>
 
-        function CardContent({ children, className }) {
-            return (
-                <div className={`p-2 ${className || ""}`}>
-                    {children}
-                </div>
-            );
-        }
+    <section id="chatbot">
+      <h2>Ask My Portfolio Chatbot</h2>
+      <div class="chatbot">
+        <div class="chat-header">Chat with Me</div>
+        <div class="chat-box" id="chat-box">
+          <div class="chat-message">👋 Hi! Ask me about my skills, projects, or experience.</div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="chat-input" placeholder="Type your question..." />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </section>
 
-        // Chatbot Component
-        function Chatbot() {
-            const [isOpen, setIsOpen] = useState(false);
-            const [messages, setMessages] = useState([
-                {
-                    text: "Hi there! I'm Abdelrahman's assistant. How can I help you today?",
-                    isUser: false,
-                    timestamp: new Date()
-                }
-            ]);
-            const [inputValue, setInputValue] = useState("");
-            const [isTyping, setIsTyping] = useState(false);
-            const messagesEndRef = useRef(null);
-            const inputRef = useRef(null);
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:abdo.elgoneeemy@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/AbdelrhmanAhmed342" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="a63b6f0e-45ef-4148-aa34-a4d3bf08f4a5.pdf" download>
+          <i class="fas fa-file-download"></i> Download CV
+        </a>
+      </div>
+    </section>
+  </div>
 
-            const scrollToBottom = () => {
-                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-            };
+  <footer>
+    © 2025 Abdelrahman Ahmed | Built with ❤️ and JavaScript
+  </footer>
 
-            useEffect(() => {
-                scrollToBottom();
-            }, [messages, isTyping]);
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message) return;
 
-            useEffect(() => {
-                if (isOpen && inputRef.current) {
-                    inputRef.current.focus();
-                }
-            }, [isOpen]);
+      const chatBox = document.getElementById('chat-box');
 
-            const toggleChat = () => {
-                setIsOpen(!isOpen);
-            };
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-message user';
+      userMsg.innerText = message;
+      chatBox.appendChild(userMsg);
 
-            const handleInputChange = (e) => {
-                setInputValue(e.target.value);
-            };
+      // Simulated bot response
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-message';
+      botMsg.innerText = getBotResponse(message);
+      chatBox.appendChild(botMsg);
 
-            const handleSendMessage = () => {
-                if (inputValue.trim() === "") return;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = '';
+    }
 
-                const userMessage = {
-                    text: inputValue,
-                    isUser: true,
-                    timestamp: new Date()
-                };
-
-                setMessages(prev => [...prev, userMessage]);
-                setInputValue("");
-                setIsTyping(true);
-
-                // Simulate bot response after a delay
-                setTimeout(() => {
-                    generateResponse(inputValue);
-                    setIsTyping(false);
-                }, 1000);
-            };
-
-            const handleKeyPress = (e) => {
-                if (e.key === "Enter") {
-                    handleSendMessage();
-                }
-            };
-
-            const handleSuggestedQuestion = (question) => {
-                setInputValue(question);
-                // Auto-send the suggested question
-                setTimeout(() => {
-                    handleSendMessage();
-                }, 100);
-            };
-
-            const generateResponse = (userInput) => {
-                userInput = userInput.toLowerCase();
-                let response = "";
-
-                // About Abdelrahman
-                if (userInput.includes("who are you") || userInput.includes("about you") || userInput.includes("introduce yourself")) {
-                    response = "I'm a virtual assistant for Abdelrahman Ahmed, a Data Scientist and Machine Learning Engineer. I can tell you about his skills, projects, and experience. What would you like to know?";
-                }
-                // Skills
-                else if (userInput.includes("skill") || userInput.includes("what can you do") || userInput.includes("technology")) {
-                    response = "Abdelrahman has expertise in Python, SQL, Machine Learning, Deep Learning, PyTorch, TensorFlow, Data Engineering, MLOps, AWS, Docker, and Git. He's also proficient with data analysis tools like Pandas, NumPy, and visualization tools like Power BI and Tableau.";
-                }
-                // Projects
-                else if (userInput.includes("project") || userInput.includes("work on") || userInput.includes("portfolio")) {
-                    response = "Abdelrahman has worked on several interesting projects including: 1) Cryptocurrency Price Prediction using LSTM, 2) Air Quality Prediction with XGBoost, and 3) LaLiga Match Analysis with clustering and classification. Would you like details on any specific project?";
-                }
-                // Experience
-                else if (userInput.includes("experience") || userInput.includes("work history") || userInput.includes("job")) {
-                    response = "Abdelrahman has worked at: 1) Rowad Modern Engineering (Mar 2025-Present) as a Project Management Information System specialist, 2) Constracta (Oct 2024-Dec 2024) as an IT Specialist, and 3) QNB Bank (Aug 2023-Sep 2023) as a Customer Service Intern.";
-                }
-                // Contact
-                else if (userInput.includes("contact") || userInput.includes("email") || userInput.includes("hire") || userInput.includes("reach")) {
-                    response = "You can contact Abdelrahman via email at abdo.elgoneeemy@gmail.com or phone at +201096723618. You can also connect with him on LinkedIn: https://www.linkedin.com/in/abdelrahman-ahmed-220873342/";
-                }
-                // Cryptocurrency project
-                else if (userInput.includes("cryptocurrency") || userInput.includes("bitcoin") || userInput.includes("ethereum") || userInput.includes("lstm")) {
-                    response = "The Cryptocurrency Price Prediction project used LSTM neural networks to predict Bitcoin and Ethereum prices. Abdelrahman achieved 83% accuracy (R²) by using historical data with technical indicators like RSI, MACD, and moving averages. Check out the project here: https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB";
-                }
-                // Air Quality project
-                else if (userInput.includes("air quality") || userInput.includes("pollution") || userInput.includes("xgboost")) {
-                    response = "The Air Quality Prediction project used XGBoost regression to forecast PM2.5 levels with 89% accuracy. The model incorporated meteorological data like temperature, humidity, and wind speed alongside pollution measurements from multiple Indian cities. See the project: https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU";
-                }
-                // LaLiga project
-                else if (userInput.includes("laliga") || userInput.includes("football") || userInput.includes("soccer") || userInput.includes("clustering")) {
-                    response = "The LaLiga Match Analysis project involved regression, clustering, and classification techniques on player and team statistics. Abdelrahman developed models that predict match outcomes with 78% accuracy and identified key performance indicators. Check out the classification notebook: https://colab.research.google.com/drive/1dyY8T7l9lLbgmTIzbpTd_1FduOpEKbVk and clustering notebook: https://colab.research.google.com/drive/1lF2Lp8cq5npiqP1rWYeQy_bQH221_3QG";
-                }
-                // GitHub
-                else if (userInput.includes("github") || userInput.includes("code") || userInput.includes("repository")) {
-                    response = "You can find Abdelrahman's GitHub repositories at: https://github.com/AbdelrhmanAhmed342?tab=repositories. His projects include code for data analysis, machine learning models, and more.";
-                }
-                // Default response
-                else {
-                    response = "I'm not sure I understand. You can ask me about Abdelrahman's skills, projects, experience, or how to contact him. What would you like to know?";
-                }
-
-                const botMessage = {
-                    text: response,
-                    isUser: false,
-                    timestamp: new Date()
-                };
-
-                setMessages(prev => [...prev, botMessage]);
-            };
-
-            const suggestedQuestions = [
-                "What are Abdelrahman's skills?",
-                "Tell me about the cryptocurrency project",
-                "What is Abdelrahman's work experience?",
-                "How can I contact Abdelrahman?"
-            ];
-
-            return (
-                <div className="chatbot-container">
-                    <div className="chatbot-button" onClick={toggleChat}>
-                        <i className="fas fa-comment"></i>
-                    </div>
-                    <div className={`chatbot-window ${isOpen ? "open" : ""}`}>
-                        <div className="chatbot-header">
-                            <h3>Abdelrahman's Assistant</h3>
-                            <button className="chatbot-close" onClick={toggleChat}>
-                                <i className="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div className="chatbot-messages">
-                            {messages.map((message, index) => (
-                                <div key={index} className={`message ${message.isUser ? "user" : "bot"}`}>
-                                    {message.text}
-                                </div>
-                            ))}
-                            {isTyping && (
-                                <div className="typing-indicator">
-                                    <div className="typing-dot"></div>
-                                    <div className="typing-dot"></div>
-                                    <div className="typing-dot"></div>
-                                </div>
-                            )}
-                            {!isTyping && messages.length === 1 && (
-                                <div className="suggested-questions">
-                                    {suggestedQuestions.map((question, index) => (
-                                        <div 
-                                            key={index} 
-                                            className="suggested-question"
-                                            onClick={() => handleSuggestedQuestion(question)}
-                                        >
-                                            {question}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                            <div ref={messagesEndRef} />
-                        </div>
-                        <div className="chatbot-input">
-                            <input
-                                type="text"
-                                placeholder="Type your message..."
-                                value={inputValue}
-                                onChange={handleInputChange}
-                                onKeyPress={handleKeyPress}
-                                ref={inputRef}
-                            />
-                            <button onClick={handleSendMessage}>
-                                <i className="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        // Main Portfolio Component
-        function Portfolio() {
-            const [expanded, setExpanded] = useState(null);
-
-            const toggleExpand = (index) => {
-                setExpanded(expanded === index ? null : index);
-            };
-
-            const projects = [
-                {
-                    title: "Cryptocurrency Price Prediction",
-                    data: "Historical price data for Bitcoin and Ethereum with technical indicators.",
-                    problem: "High volatility makes cryptocurrency price prediction challenging for traders and investors.",
-                    action: "Developed an LSTM neural network model using historical BTC/ETH data with feature engineering and technical indicators.",
-                    solution: "Achieved 83% accuracy (R²) in predicting price trends, providing valuable insights for short-term trading decisions.",
-                    fullDescription: "The dataset includes daily opening, closing, high, and low prices for Bitcoin and Ethereum over a 5-year period, along with trading volume and market capitalization data. Technical indicators like RSI, MACD, and moving averages were calculated to enhance predictive power.",
-                    link: "https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing"
-                },
-                {
-                    title: "Air Quality Prediction",
-                    data: "Air quality measurements from multiple Indian cities with meteorological data.",
-                    problem: "Air pollution poses serious health risks, but predicting pollution levels is complex due to multiple influencing factors.",
-                    action: "Developed an XGBoost regression model using historical air quality data and meteorological features.",
-                    solution: "Created accurate PM2.5 forecasts with 89% accuracy, enabling better public health advisories and pollution control measures.",
-                    fullDescription: "The dataset contains hourly measurements of PM2.5, PM10, NO2, SO2, and other pollutants from 10 Indian cities over 3 years. Meteorological data including temperature, humidity, wind speed, and wind direction were incorporated to improve prediction accuracy.",
-                    link: "https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing"
-                },
-                {
-                    title: "LaLiga Match Analysis",
-                    data: "Comprehensive LaLiga match statistics from 2015-2022 seasons.",
-                    problem: "Football clubs need data-driven insights to improve team performance and strategy.",
-                    action: "Performed regression, clustering, and classification analysis on player and team statistics.",
-                    solution: "Developed models that predict match outcomes with 78% accuracy and identified key performance indicators for success. See Classification Notebook: https://colab.research.google.com/drive/1dyY8T7l9lLbgmTIzbpTd_1FduOpEKbVk?usp=sharing, Clustering Notebook: https://colab.research.google.com/drive/1lF2Lp8cq5npiqP1rWYeQy_bQH221_3QG?usp=sharing",
-                    fullDescription: "The dataset includes detailed match statistics for all LaLiga games from 2015 to 2022, including goals, shots, possession, passes, tackles, and player ratings. Player demographics, team formations, and match conditions were also incorporated in the analysis.",
-                    link: "https://github.com/AbdelrhmanAhmed342?tab=repositories"
-                }
-            ];
-
-            const skills = [
-                "Python",
-                "SQL",
-                "Machine Learning",
-                "Deep Learning",
-                "PyTorch",
-                "TensorFlow",
-                "Data Engineering",
-                "MLOps",
-                "AWS",
-                "Docker",
-                "Git"
-            ];
-
-            const experiences = [
-                {
-                    company: "Rowad Modern Engineering",
-                    position: "Project Management Information System",
-                    period: "Mar 2025 – Present",
-                    description: "Managing and maintaining large-scale project data in Oracle Primavera Unifier. Automated data cleaning, validation, and reporting workflows using Python (Pandas, NumPy) and SQL, reducing manual work and errors."
-                },
-                {
-                    company: "Constracta",
-                    position: "IT Specialist",
-                    period: "Oct 2024 – Dec 2024",
-                    description: "Reduced system downtime by 25% through improved maintenance protocols. Managed network configurations, implemented secure user account policies, and set up automated backup routines to ensure data security and availability."
-                },
-                {
-                    company: "QNB Bank",
-                    position: "Customer Service Intern",
-                    period: "Aug 2023 – Sep 2023",
-                    description: "Handled customer banking inquiries, processed financial transactions, and improved the documentation process for service requests using Excel. Delivered quick and accurate solutions while maintaining excellent customer satisfaction."
-                }
-            ];
-
-            return (
-                <div>
-                    {/* Header */}
-                    <header>
-                        <div className="container">
-                            <div className="header-content">
-                                <div className="logo">Abdelrahman<span>Ahmed</span></div>
-                                <nav>
-                                    <ul>
-                                        <li><a href="#about">About</a></li>
-                                        <li><a href="#projects">Projects</a></li>
-                                        <li><a href="#skills">Skills</a></li>
-                                        <li><a href="#experience">Experience</a></li>
-                                        <li><a href="#contact">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </header>
-
-                    {/* Hero Section */}
-                    <section className="hero">
-                        <div className="container">
-                            <h1>Abdelrahman Ahmed</h1>
-                            <h2>Data Scientist & Machine Learning Engineer</h2>
-                            <p>Transforming complex data into actionable insights and predictive models</p>
-                            <div className="hero-buttons">
-                                <a href="#projects" className="btn">View My Work</a>
-                                <a href="#contact" className="btn btn-outline">Get In Touch</a>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* About Section */}
-                    <section id="about">
-                        <div className="container">
-                            <div className="section-title">
-                                <h2>About Me</h2>
-                                <p>Passionate data scientist with expertise in machine learning and data analysis</p>
-                            </div>
-                            <div className="about-content">
-                                <div className="about-text">
-                                    <h3>Turning Data into Solutions</h3>
-                                    <p>I am a dedicated Data Scientist and Machine Learning Engineer with a strong foundation in Python, SQL, and advanced ML frameworks. My journey spans real-world projects where I've built predictive models, designed recommendation systems, and performed large-scale data analysis.</p>
-                                    <p>Highlights include forecasting air quality using XGBoost, analyzing sports data for LaLiga, and creating custom clustering and classification models. I'm committed to transforming complex data into actionable insights that drive decision-making and deliver measurable impact.</p>
-                                </div>
-                                <div className="about-image">
-                                    <img src="IMG_20250826_133321.jpg" alt="Abdelrahman Ahmed" />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Projects Section */}
-                    <section id="projects">
-                        <div className="container">
-                            <div className="section-title">
-                                <h2>My Projects</h2>
-                                <p>Explore my data science and machine learning projects</p>
-                            </div>
-                            <div className="projects-grid">
-                                {projects.map((proj, index) => (
-                                    <Card key={index} className="project-card">
-                                        <CardContent className="project-content">
-                                            <h3>{proj.title}</h3>
-                                            <p className="data-description">{proj.data}</p>
-                                            <p className="problem"><strong>Problem:</strong> {proj.problem}</p>
-                                            <p className="action"><strong>Action:</strong> {proj.action}</p>
-                                            <p className="solution"><strong>Solution:</strong> {proj.solution}</p>
-                                            <div className="full-description" style={{display: expanded === index ? 'block' : 'none'}}>
-                                                <p>{proj.fullDescription}</p>
-                                            </div>
-                                            <span className="read-more" onClick={() => toggleExpand(index)}>
-                                                {expanded === index ? 'Read less' : 'Read more'}
-                                            </span>
-                                            <a href={proj.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                                                View Project <i className="fas fa-arrow-right"></i>
-                                            </a>
-                                        </CardContent>
-                                    </Card>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Skills Section */}
-                    <section id="skills">
-                        <div className="container">
-                            <div className="section-title">
-                                <h2>Technical Skills</h2>
-                                <p>My technical expertise across data science and machine learning</p>
-                            </div>
-                            <div className="skills-container">
-                                <div className="skill-category">
-                                    <h3><i className="fas fa-code"></i> Programming</h3>
-                                    <div className="skills-list">
-                                        <span className="skill">Python</span>
-                                        <span className="skill">SQL</span>
-                                        <span className="skill">PL/SQL</span>
-                                    </div>
-                                </div>
-                                <div className="skill-category">
-                                    <h3><i className="fas fa-brain"></i> Machine Learning</h3>
-                                    <div className="skills-list">
-                                        <span className="skill">Scikit-learn</span>
-                                        <span className="skill">TensorFlow</span>
-                                        <span className="skill">PyTorch</span>
-                                        <span className="skill">XGBoost</span>
-                                        <span className="skill">Keras</span>
-                                    </div>
-                                </div>
-                                <div className="skill-category">
-                                    <h3><i className="fas fa-chart-bar"></i> Data Analysis</h3>
-                                    <div className="skills-list">
-                                        <span className="skill">Pandas</span>
-                                        <span className="skill">NumPy</span>
-                                        <span className="skill">Matplotlib</span>
-                                        <span className="skill">Seaborn</span>
-                                        <span className="skill">Excel</span>
-                                    </div>
-                                </div>
-                                <div className="skill-category">
-                                    <h3><i className="fas fa-database"></i> Data Tools</h3>
-                                    <div className="skills-list">
-                                        <span className="skill">Power BI</span>
-                                        <span className="skill">Tableau</span>
-                                        <span className="skill">Oracle</span>
-                                        <span className="skill">MySQL</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Experience Section */}
-                    <section id="experience">
-                        <div className="container">
-                            <div className="section-title">
-                                <h2>Work Experience</h2>
-                                <p>My professional journey in data science and IT</p>
-                            </div>
-                            <div className="timeline">
-                                {experiences.map((exp, index) => (
-                                    <div key={index} className="timeline-item">
-                                        <div className="timeline-content">
-                                            <h3>{exp.company}</h3>
-                                            <span className="date">{exp.period}</span>
-                                            <p><strong>{exp.position}</strong></p>
-                                            <p>{exp.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Contact Section */}
-                    <section id="contact">
-                        <div className="container">
-                            <div className="section-title">
-                                <h2>Get In Touch</h2>
-                                <p>Feel free to reach out for collaborations or opportunities</p>
-                            </div>
-                            <div className="contact-content">
-                                <div className="contact-icons">
-                                    <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank" rel="noopener noreferrer" className="contact-icon">
-                                        <i className="fab fa-linkedin"></i>
-                                        <span>LinkedIn</span>
-                                    </a>
-                                    <a href="mailto:abdo.elgoneeemy@gmail.com" className="contact-icon">
-                                        <i className="fas fa-envelope"></i>
-                                        <span>Email</span>
-                                    </a>
-                                    <a href="tel:+201096723618" className="contact-icon">
-                                        <i className="fas fa-phone"></i>
-                                        <span>Phone</span>
-                                    </a>
-                                    <a href="https://github.com/AbdelrhmanAhmed342?tab=repositories" target="_blank" rel="noopener noreferrer" className="contact-icon">
-                                        <i className="fab fa-github"></i>
-                                        <span>GitHub</span>
-                                    </a>
-                                    <a href="Abdelrahman_Ahmed_Data_Scientist_CV.pdf" download className="contact-icon">
-                                        <i className="fas fa-file-pdf"></i>
-                                        <span>Resume</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Footer */}
-                    <footer>
-                        <div className="container">
-                            <div className="footer-content">
-                                <p>&copy; 2025 Abdelrahman Ahmed. All rights reserved.</p>
-                                <div className="social-links">
-                                    <a href="#"><i className="fab fa-twitter"></i></a>
-                                    <a href="#"><i className="fab fa-instagram"></i></a>
-                                    <a href="#"><i className="fab fa-facebook"></i></a>
-                                    <a href="#"><i className="fab fa-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-
-                    {/* Chatbot */}
-                    <Chatbot />
-                </div>
-            );
-        }
-
-        // Render the Portfolio component
-        ReactDOM.render(<Portfolio />, document.getElementById('root'));
-    </script>
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes('skills')) return "I’m skilled in Python, C++, TensorFlow, PyTorch, SQL, and cloud platforms (AWS/GCP/Azure).";
+      if (msg.includes('projects')) return "Check out my projects: Salary Recommendation, Chest X-Ray Classification, Weather Engine.";
+      if (msg.includes('experience')) return "Experience: Rowad Modern Engineering, Elevoo (ML Intern), Cellula Technologies (AI/ML Intern).";
+      if (msg.includes('contact')) return "You can reach me via email, LinkedIn, or GitHub in the Contact section.";
+      return "I’m still learning 🤖. Please check my portfolio sections above!";
+    }
+  </script>
 </body>
 </html>
