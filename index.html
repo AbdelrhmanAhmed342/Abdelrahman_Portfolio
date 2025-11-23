@@ -3,110 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdelrahman Ahmed - Portfolio with Chatbot</title>
+  <meta name="description" content="Abdelrahman Ahmed's portfolio showcasing data analysis, machine learning, and AI projects. Expertise in Python, SQL, Power BI, and more.">
+  <title>Abdelrahman Ahmed - Data Analyst & ML Engineer Portfolio</title>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin:0; padding:0; background:#f9fafb; color:#1f2937; }
+    body { font-family: 'Segoe UI', sans-serif; margin:0; padding:0; background:#f9fafb; color:#1f2937; line-height:1.6; }
     header { background:white; padding:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
     nav ul { display:flex; gap:20px; justify-content:center; list-style:none; }
-    nav a { text-decoration:none; color:#1f2937; font-weight:600; }
+    nav a { text-decoration:none; color:#1f2937; font-weight:600; transition: color 0.3s; }
     nav a:hover { color:#2563eb; }
-    .hero { text-align:center; padding:100px 20px; background:linear-gradient(135deg,#2563eb,#1e40af); color:white; }
-    .hero h1 { font-size:3rem; margin-bottom:10px; }
-    .btn { background:#fff; color:#2563eb; padding:10px 20px; border-radius:8px; text-decoration:none; margin:5px; font-weight:600; }
+    .hero { text-align:center; padding:120px 20px; background:linear-gradient(135deg,#2563eb,#1e40af); color:white; border-bottom: 4px solid #e0e7ff; }
+    .hero h1 { font-size:3.5rem; margin-bottom:10px; }
+    .hero h2 { font-size:1.8rem; margin-bottom:20px; }
+    .btn { background:#fff; color:#2563eb; padding:12px 24px; border-radius:8px; text-decoration:none; margin:5px; font-weight:600; transition: background 0.3s; }
     .btn:hover { background:#e0e7ff; }
-    section { padding:60px 20px; max-width:1100px; margin:auto; }
-    h2 { text-align:center; margin-bottom:30px; }
-    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; }
-    .project-card { background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    .project-card h3 { margin-bottom:10px; color:#2563eb; }
-    .project-card p { margin:5px 0; }
-    footer { text-align:center; background:#1f2937; color:white; padding:20px; margin-top:40px; }
-
+    section { padding:80px 20px; max-width:1200px; margin:auto; }
+    h2 { text-align:center; margin-bottom:40px; color:#1e40af; font-size:2.5rem; }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:25px; }
+    .project-card { background:white; border-radius:12px; padding:25px; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .project-card:hover { transform: translateY(-5px); }
+    .project-card h3 { margin-bottom:15px; color:#2563eb; font-size:1.5rem; }
+    .project-card p { margin:8px 0; font-size:0.95rem; }
+    .project-card img { width:100%; border-radius:8px; margin-bottom:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .project-card a { color:#2563eb; text-decoration:none; font-weight:600; }
+    .project-card a:hover { text-decoration:underline; }
+    footer { text-align:center; background:#1f2937; color:white; padding:25px; margin-top:50px; font-size:0.9rem; }
     /* Timeline for Experience */
-    .timeline { border-left:4px solid #2563eb; padding-left:20px; }
-    .timeline-item { margin-bottom:30px; }
-    .timeline-item h3 { color:#2563eb; }
-    .timeline-item p { margin:5px 0; }
-
+    .timeline { border-left:4px solid #2563eb; padding-left:25px; }
+    .timeline-item { margin-bottom:40px; position:relative; }
+    .timeline-item::before { content:''; width:12px; height:12px; background:#2563eb; border-radius:50%; position:absolute; left:-30px; top:5px; }
+    .timeline-item h3 { color:#2563eb; font-size:1.4rem; }
+    .timeline-item p { margin:8px 0; font-style:italic; color:#4b5563; }
+    .timeline-item ul { list-style-type:disc; padding-left:20px; font-size:0.95rem; }
+    /* Skills Section */
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .skill-card { background:white; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+    .skill-card h3 { color:#1e40af; margin-bottom:10px; }
+    .skill-card ul { list-style:none; padding:0; }
+    .skill-card li { margin:5px 0; font-size:0.95rem; }
+    .progress-bar { background:#e0e7ff; border-radius:5px; height:8px; margin-top:5px; }
+    .progress-fill { background:#2563eb; height:100%; border-radius:5px; }
+    /* Certifications Carousel */
+    .certs-carousel { display:flex; overflow-x:auto; gap:15px; padding:10px 0; }
+    .cert-item { min-width:200px; text-align:center; }
+    .cert-item img { width:100%; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .cert-item p { margin-top:10px; font-size:0.9rem; color:#4b5563; }
     /* Chatbot */
     .chatbot-button {
       position: fixed; bottom: 20px; right: 20px;
       background: #2563eb; color: white; border: none;
       border-radius: 50%; width: 60px; height: 60px;
       font-size: 1.5rem; cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1001;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1001; transition: transform 0.3s;
     }
+    .chatbot-button:hover { transform: scale(1.1); }
     .chatbot-window {
       position: fixed; bottom: 90px; right: 20px;
-      width: 340px; max-height: 450px; background: white;
+      width: 360px; max-height: 480px; background: white;
       border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       display: flex; flex-direction: column; overflow: hidden; z-index: 1001;
     }
-    .chat-header { background: #2563eb; color: white; padding: 10px; text-align: center; font-weight: bold; }
-    .chat-body { flex: 1; padding: 10px; overflow-y: auto; font-size: 0.9rem; }
-    .chat-message { margin: 5px 0; padding: 8px 12px; border-radius: 12px; max-width: 80%; line-height: 1.4; }
+    .chat-header { background: #2563eb; color: white; padding: 12px; text-align: center; font-weight: bold; }
+    .chat-body { flex: 1; padding: 12px; overflow-y: auto; font-size: 0.95rem; background:#f9fafb; }
+    .chat-message { margin: 6px 0; padding: 10px 14px; border-radius: 12px; max-width: 80%; line-height: 1.5; }
     .chat-message.user { background: #2563eb; color: white; margin-left: auto; }
-    .chat-message.bot { background: #f3f4f6; color: #1f2937; margin-right: auto; }
-    .chat-input { display: flex; border-top: 1px solid #ddd; }
-    .chat-input input { flex: 1; border: none; padding: 10px; font-size: 0.9rem; }
-    .chat-input button { background: #2563eb; border: none; color: white; padding: 10px 15px; cursor: pointer; }
+    .chat-message.bot { background: #e0e7ff; color: #1f2937; margin-right: auto; }
+    .chat-input { display: flex; border-top: 1px solid #ddd; background:white; }
+    .chat-input input { flex: 1; border: none; padding: 12px; font-size: 0.95rem; }
+    .chat-input button { background: #2563eb; border: none; color: white; padding: 12px 18px; cursor: pointer; transition: background 0.3s; }
+    .chat-input button:hover { background: #1e40af; }
   </style>
 </head>
 <body>
   <div id="root"></div>
-
   <script type="text/babel">
     const { useState } = React;
-
     // Chatbot Component
     function Chatbot() {
       const [open, setOpen] = useState(false);
       const [messages, setMessages] = useState([
-        { from: "bot", text: "Hi 👋 I'm Abdelrahman's assistant. Ask me about his skills, experience, or projects!" }
+        { from: "bot", text: "Hi 👋 I'm Abdelrahman's assistant. Ask me about his skills, experience, projects, or certifications!" }
       ]);
       const [input, setInput] = useState("");
-
       const cvData = {
-        about: "I'm Abdelrahman Ahmed, a Data Scientist & ML Engineer skilled in Python, SQL, TensorFlow, PyTorch, and AWS. Passionate about AI and data-driven solutions.",
+        about: "Detail-oriented Data Analyst with hands-on experience in SQL, Python, Power BI, and ETL automation. Proven ability to clean, transform, and visualize large datasets (320K+ rows) to deliver actionable business insights and reduce reporting time by 50%. Skilled in dashboard development, data storytelling, and stakeholder communication. Passionate about driving data-informed decisions and operational efficiency.",
         experience: [
-          "Rowad Modern Engineering (2025–Present): Automated integration of 320K+ records using Python and SQL. Built dashboards that reduced reporting time by 50%.",
-          "Elevoo (2025): Developed ML classification models and NLP pipelines, improving training efficiency by 20%.",
-          "Cellula Technologies (2025): Built NLP models with TensorFlow/scikit-learn, applied hyperparameter tuning, delivered final project with certificate + recommendation.",
-          "Constracta (2024): IT Specialist, reduced system downtime 25%, secured user accounts and implemented backup routines.",
-          "QNB Bank (2023): Customer Service Intern, resolved inquiries, processed transactions, improved documentation using Excel."
+          "Rowad Modern Engineering (Mar 2024 – Present): Optimized Oracle Primavera Unifier system to meet specific business requirements, improving project tracking accuracy and workflow efficiency by 25%. Designed and delivered interactive Power BI dashboards, visualizing on-time delivery improvement (+35%) and cost variance reduction (15%), enabling faster decision-making by management. Cleaned, validated, and transformed 320K+ rows of data using Python (Pandas, NumPy) and SQL, ensuring accurate and reliable reporting. Automated ETL processes and built data dictionaries, ensuring consistent, reliable reporting across departments.",
+          "Elevvo (Remote) (Sep 2024 – Dec 2024): Conducted exploratory data analysis (EDA), feature engineering, and preprocessing on multiple datasets (Student Performance, Mall Customers), providing actionable insights for business decisions. Built predictive models using scikit-learn and visualized results with Matplotlib and Seaborn, supporting stakeholders in trend analysis and performance tracking. Completed 5 data-driven projects including regression, clustering, and classification, achieving strong model performance metrics and delivering clear business-oriented reports.",
+          "Constracta (Cairo, Egypt) (Oct 2024 – Dec 2024): Assisted in IT infrastructure setup and server/network maintenance, ensuring reliable data access and system stability.",
+          "QNB Bank (Cairo, Egypt) (Aug 2023 – Sep 2023): Analyzed customer transaction data using Excel and SQL to support compliance reporting and process improvement."
         ],
-        skills: "Python, SQL, Machine Learning, Deep Learning, TensorFlow, PyTorch, Data Engineering, MLOps, AWS, Docker, Git.",
+        skills: "Programming & Databases: SQL (Advanced: Joins, Window Functions, CTEs, Query Optimization), Python (Pandas, NumPy), MySQL, Oracle SQL. Analysis & Visualization: Power BI (DAX, Power Query, Data Modeling), Excel (Advanced: PivotTables, Power Query, Dashboard Design), KPI Dashboards, IBM Cognos Analytics, Matplotlib, Seaborn, Plotly. Data Wrangling & ETL: Data Cleaning, Data Transformation, Data Validation, Automated ETL Pipelines (Python, Power Query), Feature Engineering.",
         projects: [
-          "Chest X-Ray Classification → CNN model for pneumonia detection. Link: https://colab.research.google.com/drive/1oR1A_qpiENqZ80T9lUKK0QpkKYXZDA--?usp=sharing",
-          "Air Quality Prediction in India → Forecasting PM2.5 with XGBoost. Link: https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing",
-          "Cryptocurrency Historical Prices → LSTM model for BTC/ETH price prediction. Link: https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing",
-          "LaLiga Analysis (3 models): Clustering: https://colab.research.google.com/drive/1lF2Lp8cq5npiqP1rWYeQy_bQH221_3QG?usp=sharing | Regression: https://colab.research.google.com/drive/1bFOhZUlb97ON3lNIu4H1vK85Jus_9nE5?usp=sharing | Classification: https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing",
-          "Weather Recommendation Engine (Madrid 1999–2015): https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing"
+          "KPI Dashboard (Rowad Modern Engineering) → Analyzed 320K+ project records and designed interactive Power BI dashboards tracking KPIs, cost variance, and on-time delivery (+35%), enabling faster management decisions.",
+          "Sales Analysis Project → Built SQL queries and Excel dashboards to evaluate sales performance across regions and products, reducing manual reporting time by 50% and providing actionable insights.",
+          "Customer Churn Analysis → Conducted EDA, segmentation, and visualization using Python (Pandas, Matplotlib, Seaborn) and SQL to identify churn patterns and recommend retention strategies.",
+          "Student Performance Prediction → Performed data analysis and built regression/classification models using Python (Pandas, Scikit-learn), visualizing insights for stakeholders and supporting program improvements."
         ]
       };
-
       const handleSend = () => {
         if (!input.trim()) return;
         const userMsg = { from: "user", text: input };
         setMessages([...messages, userMsg]);
-
         let reply = "Sorry, I didn't get that. Try asking about skills, experience, or projects!";
         const q = input.toLowerCase();
         if (q.includes("about") || q.includes("who")) reply = cvData.about;
         else if (q.includes("experience") || q.includes("work")) reply = cvData.experience.join(" | ");
         else if (q.includes("skill")) reply = cvData.skills;
         else if (q.includes("project")) reply = cvData.projects.join(" | ");
-
         setTimeout(() => {
           setMessages(msgs => [...msgs, { from: "bot", text: reply }]);
         }, 500);
         setInput("");
       };
-
       return (
         <>
           <button className="chatbot-button" onClick={() => setOpen(!open)}>
@@ -135,70 +147,92 @@
         </>
       );
     }
-
     // Portfolio Component
     function Portfolio() {
       const projects = [
+        {
+          title: "Cookie Cats Retention Model",
+          problem: "Mobile game retention drops after paywall changes—need to test and predict churn.",
+          action: "Conducted A/B testing on 90k players; built Random Forest model with feature engineering.",
+          result: "Achieved ROC-AUC 0.885; proved early playtime drives 82% of retention (gate position only 0.06%).",
+          link: "https://github.com/AbdelrhmanAhmed342/Cookie-Game",
+          img: "https://via.placeholder.com/300x200?text=Feature+Importance+Plot" // Replace with real image URL
+        },
+        {
+          title: "Falcon 9 Launch Prediction (SpaceX)",
+          problem: "Predicting rocket launch success to optimize space missions.",
+          action: "Built interactive Dash app with Folium maps and ML models on launch data.",
+          result: "Visualized 67% success trends; model hit 85% accuracy for outcome prediction.",
+          link: "https://colab.research.google.com/drive/1YourSpaceXLink?usp=sharing", // Add real link
+          img: "https://via.placeholder.com/300x200?text=SpaceX+Dashboard" // Replace with real image URL
+        },
         {
           title: "Chest X-Ray Classification",
           problem: "Pneumonia detection in X-rays is time-consuming for doctors.",
           action: "Built a CNN model in TensorFlow to classify chest X-rays.",
           result: "Model achieved strong accuracy, supporting medical diagnostics.",
-          link: "https://colab.research.google.com/drive/1oR1A_qpiENqZ80T9lUKK0QpkKYXZDA--?usp=sharing"
+          link: "https://colab.research.google.com/drive/1oR1A_qpiENqZ80T9lUKK0QpkKYXZDA--?usp=sharing",
+          img: "https://via.placeholder.com/300x200?text=Chest+X-Ray+Model" // Replace with real image URL
         },
         {
           title: "Air Quality Prediction in India",
           problem: "Air pollution poses serious health risks in urban areas.",
           action: "Developed an XGBoost regression model using meteorological + air quality data.",
           result: "Produced accurate PM2.5 forecasts to support public health advisories.",
-          link: "https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing"
+          link: "https://colab.research.google.com/drive/1N7RKbOWiL5ojFA0EHtjj3toU1ema74JU?usp=sharing",
+          img: "https://via.placeholder.com/300x200?text=Air+Quality+Forecast" // Replace with real image URL
         },
         {
           title: "Cryptocurrency Historical Prices",
           problem: "High volatility in BTC/ETH makes price forecasting difficult.",
           action: "Built an LSTM neural network on 5 years of BTC/ETH data.",
           result: "Achieved 83% accuracy in predicting price trends.",
-          link: "https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing"
+          link: "https://colab.research.google.com/drive/1D64sPJBJUfKezXrealSUo0ZgWq2tIgOB?usp=sharing",
+          img: "https://via.placeholder.com/300x200?text=Crypto+Price+Model" // Replace with real image URL
         },
         {
           title: "LaLiga Match Analysis (3 Models)",
           problem: "Football clubs need insights into performance and tactics.",
           action: "Developed clustering, regression, and classification models on LaLiga dataset.",
           result: "Delivered player rankings, expected goals overperformance, and outcome prediction.",
-          link: "https://github.com/AbdelrhmanAhmed342"
+          link: "https://github.com/AbdelrhmanAhmed342",
+          img: "https://via.placeholder.com/300x200?text=LaLiga+Analysis" // Replace with real image URL
         },
         {
           title: "Weather Recommendation Engine (Madrid)",
           problem: "People often struggle to plan activities based on weather.",
           action: "Built a Streamlit app using 15+ years of Madrid weather data.",
           result: "Suggested outdoor/indoor activities tailored to conditions.",
-          link: "https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing"
+          link: "https://colab.research.google.com/drive/1w4XVgXRV_TrDKBjN4jA-sYxMOhA0mzzU?usp=sharing",
+          img: "https://via.placeholder.com/300x200?text=Weather+App" // Replace with real image URL
         }
       ];
-
       const experiences = [
         {
           company: "Rowad Modern Engineering",
-          role: "Project Management Information System",
-          period: "Mar 2025 – Present",
+          role: "PMIS Developer & Data Analyst",
+          period: "Mar 2024 – Present",
           details: [
-            "Automated data integration for 320K+ records using Python (Pandas/NumPy).",
-            "Built SQL queries and dashboards reducing reporting time by 50%."
+            "Optimized Oracle Primavera Unifier system to meet specific business requirements, improving project tracking accuracy and workflow efficiency by 25%.",
+            "Designed and delivered interactive Power BI dashboards, visualizing on-time delivery improvement (+35%) and cost variance reduction (15%), enabling faster decision-making by management.",
+            "Cleaned, validated, and transformed 320K+ rows of data using Python (Pandas, NumPy) and SQL, ensuring accurate and reliable reporting.",
+            "Automated ETL processes and built data dictionaries, ensuring consistent, reliable reporting across departments."
           ]
         },
         {
-          company: "Elevoo",
+          company: "Elevvo (Remote)",
           role: "Machine Learning Intern",
-          period: "Sep 2025 – Dec 2025",
+          period: "Sep 2024 – Dec 2024",
           details: [
-            "Developed ML classification models and NLP pipelines (tokenization, vectorization).",
-            "Preprocessed datasets, improving training efficiency by 20%."
+            "Conducted exploratory data analysis (EDA), feature engineering, and preprocessing on multiple datasets (Student Performance, Mall Customers), providing actionable insights for business decisions.",
+            "Built predictive models using scikit-learn and visualized results with Matplotlib and Seaborn, supporting stakeholders in trend analysis and performance tracking.",
+            "Completed 5 data-driven projects including regression, clustering, and classification, achieving strong model performance metrics and delivering clear business-oriented reports."
           ]
         },
         {
           company: "Cellula Technologies",
           role: "AI/ML Intern",
-          period: "Sep 2025 – Nov 2025",
+          period: "Sep 2024 – Nov 2024",
           details: [
             "Built NLP models with TensorFlow/scikit-learn and applied hyperparameter tuning.",
             "Delivered final project and earned certificate + recommendation letter."
@@ -223,36 +257,87 @@
           ]
         }
       ];
-
       return (
         <div>
           <header>
             <nav>
               <ul>
                 <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
             </nav>
           </header>
-
           <section className="hero">
             <h1>Abdelrahman Ahmed</h1>
-            <h2>Data Scientist & ML Engineer</h2>
+            <h2>Data Analyst & ML Engineer</h2>
             <a href="#projects" className="btn">View Projects</a>
           </section>
-
           <section id="about">
             <h2>About Me</h2>
-            <p>I am Abdelrahman, a passionate AI/ML Engineer with a proven record of developing predictive models, building NLP pipelines, and delivering impactful data-driven solutions. Skilled in Python, SQL, TensorFlow, and PyTorch, I focus on transforming complex datasets into actionable insights and real-world applications.</p>
+            <p>Detail-oriented Data Analyst with hands-on experience in SQL, Python, Power BI, and ETL automation. Proven ability to clean, transform, and visualize large datasets (320K+ rows) to deliver actionable business insights and reduce reporting time by 50%. Skilled in dashboard development, data storytelling, and stakeholder communication. Passionate about driving data-informed decisions and operational efficiency.</p>
+            <h3>Certifications</h3>
+            <div className="certs-carousel">
+              <div className="cert-item">
+                <img src="https://via.placeholder.com/200x100?text=IBM+Data+Analytics" alt="IBM Data Analytics Certificate" />
+                <p>IBM Data Analytics Certificate</p>
+              </div>
+              <div className="cert-item">
+                <img src="https://via.placeholder.com/200x100?text=Python+for+DS" alt="Python for Data Science" />
+                <p>Python for Data Science</p>
+              </div>
+              <div className="cert-item">
+                <img src="https://via.placeholder.com/200x100?text=Deep+Learning+PyTorch" alt="Deep Learning with PyTorch" />
+                <p>Deep Learning with PyTorch</p>
+              </div>
+            </div>
           </section>
-
+          <section id="skills">
+            <h2>Skills</h2>
+            <div className="skills-grid">
+              <div className="skill-card">
+                <h3>Programming & Databases</h3>
+                <ul>
+                  <li>SQL (Advanced: Joins, Window Functions, CTEs, Query Optimization)</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '90%'}}></div></div>
+                  <li>Python (Pandas, NumPy)</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '90%'}}></div></div>
+                  <li>MySQL, Oracle SQL</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '80%'}}></div></div>
+                </ul>
+              </div>
+              <div className="skill-card">
+                <h3>Analysis & Visualization</h3>
+                <ul>
+                  <li>Power BI (DAX, Power Query, Data Modeling)</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '90%'}}></div></div>
+                  <li>Excel (Advanced: PivotTables, Power Query, Dashboard Design)</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '85%'}}></div></div>
+                  <li>KPI Dashboards, IBM Cognos Analytics, Matplotlib, Seaborn, Plotly</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '80%'}}></div></div>
+                </ul>
+              </div>
+              <div className="skill-card">
+                <h3>Data Wrangling & ETL</h3>
+                <ul>
+                  <li>Data Cleaning, Data Transformation, Data Validation</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '90%'}}></div></div>
+                  <li>Automated ETL Pipelines (Python, Power Query)</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '85%'}}></div></div>
+                  <li>Feature Engineering</li>
+                  <div className="progress-bar"><div className="progress-fill" style={{width: '80%'}}></div></div>
+                </ul>
+              </div>
+            </div>
+          </section>
           <section id="projects">
             <h2>Projects</h2>
             <div className="projects-grid">
               {projects.map((proj, i) => (
                 <div key={i} className="project-card">
+                  <img src={proj.img} alt={`${proj.title} Screenshot`} />
                   <h3>{proj.title}</h3>
                   <p><b>Problem:</b> {proj.problem}</p>
                   <p><b>Action:</b> {proj.action}</p>
@@ -262,7 +347,6 @@
               ))}
             </div>
           </section>
-
           <section id="experience">
             <h2>Experience</h2>
             <div className="timeline">
@@ -277,19 +361,20 @@
               ))}
             </div>
           </section>
-
           <section id="contact">
             <h2>Contact</h2>
+            <p>Open to remote DA/DS roles—let's connect!</p>
             <p>Email: <a href="mailto:abdo.elgoneeemy@gmail.com">abdo.elgoneeemy@gmail.com</a></p>
-            <p><a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank">LinkedIn</a> | <a href="https://github.com/AbdelrhmanAhmed342" target="_blank">GitHub</a></p>
+            <p>
+              <a href="https://www.linkedin.com/in/abdelrahman-ahmed-220873342/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> | 
+              <a href="https://github.com/AbdelrhmanAhmed342" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </p>
           </section>
-
-          <footer>© 2025 Abdelrahman Ahmed</footer>
+          <footer>© 2025 Abdelrahman Ahmed | Built with GitHub Pages & Grok API</footer>
           <Chatbot />
         </div>
       );
     }
-
     ReactDOM.render(<Portfolio />, document.getElementById("root"));
   </script>
 </body>
